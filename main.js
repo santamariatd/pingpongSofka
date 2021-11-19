@@ -37,6 +37,28 @@
         move: function(){
             this.x += (this.speed_x * this.direction);
             this.y += (this.speed_y);
+            //Control del movimiento con paredes horizontales
+            if (this.y <= 10) {
+				this.speed_y = -this.speed_y;
+				this.bounce_angle = -this.bounce_angle;
+			}
+			if (this.y >= 390) {
+				this.speed_y = -this.speed_y;
+				this.bounce_angle = -this.bounce_angle;
+			}
+            //Control del movimiento con paredes verticales
+            if (this.x <= 10) {
+				this.x = 400;
+				this.y = 200;
+				this.speed_x = -this.speed_x;
+				this.bounce_angle = -this.bounce_angle;
+			}
+			if (this.x >= 790) {
+				this.x = 400;
+				this.y = 200;
+				this.speed_x = -this.speed_x;
+				this.bounce_angle = -this.bounce_angle;
+			}
         },
         get width(){
             return this.radius * 2;
@@ -196,9 +218,6 @@ document.addEventListener("keydown",function(ev){
 });
 board_view.draw();
 window.requestAnimationFrame(controller);
-/*setTimeout(function(){
-    ball.direction = -1;
-},4000);*/
 
 function controller (){
     board_view.play();
